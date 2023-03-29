@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <!-- Main menu -->
+    <div class="navbar navbar-blue navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="nav navbar-nav navbar-header" style="padding: 5px 0">
+                <a href="#" class="navbar-link">
+                    <img src="~/logo_menu.png" alt="Brand">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- End main menu -->
+
+
+    @RenderBody()
+
+
+    <!--ng-options="x.ten_khoa for x in ds_khoa_dt track by x.ma_khoa"-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

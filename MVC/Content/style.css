@@ -1,0 +1,152 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    padding-top: 51px;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.navbar-blue {
+    background-color: #005E9C;
+    color: #fff;
+}
+
+.no-border {
+    border: none;
+    background-color: #f8f8f8;
+    color: #005E9C;
+}
+
+.error {
+    color: #ff0000;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.content {
+    margin: -16px 4px 0;
+}
+
+    .content .search .form-control, .btn {
+        border-radius: 0;
+    }
+
+    .content .filter {
+        padding: 15px 20px 0;
+    }
+
+    th {
+        text-align: center;
+    }
+
+.content table th {
+    background-color: #107ac1;
+    color: #f3ebeb;
+    font-weight: 600;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tbody tr:hover, .hover {
+    background-color: #5dbeff !important;
+}
+
+.modal-dialog-full {
+    /*width: 80%;*/
+    max-height: calc(100vh - 60px);
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.modal-body-scrollable {
+    overflow-y: auto;
+    max-height: calc(100vh - 60px - 58.85px - 65px);
+}
+
+.modal-header-lg, .modal-header-lg button {
+    font-size: 1.5rem;
+}
+
+.modal-content {
+    max-height: 100%;
+    border-radius: 0;
+}
+
+.modal-footer {
+    background-color: #e2ecf9;
+}
+
+.info {
+    margin-top: 4px;
+}
+
+.required {
+    color: #cf0808;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        padding-top: calc(51px + 15px);
+    }
+
+    .navbar-header {
+        float: left;
+    }
+
+    .navbar-nav > li {
+        float: left;
+    }
+
+    .navbar-right {
+        float: right;
+    }
+
+    .modal-dialog-full {
+        width: 90%;
+        max-height: calc(100vh - 20px);
+    }
+
+    .modal-body-scrollable {
+        max-height: calc(100vh - 20px - 58.85px - 65px);
+    }
+}
+
+
+/*Animation*/
+
+.filter.ng-hide-add {
+    opacity: 1;
+    transform: scaleY(0);
+}
+
+    .filter.ng-hide-add.ng-hide-add-active {
+        opacity: 0;
+        transition: all .3s ease-in-out;
+        transform: scaleY(1);
+    }
+
+.filter.ng-hide-remove {
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    transform-origin: left top;
+    transform: scaleY(0);
+}
+
+    .filter.ng-hide-remove.ng-hide-remove-active {
+        opacity: 1;
+        transform: scaleY(1);
+    }

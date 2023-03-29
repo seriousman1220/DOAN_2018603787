@@ -3,33 +3,136 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angular</title>
+    <title>Công ty TNHH Xuất khẩu nông sản Vạn phúc</title>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
-
-    <!-- Main menu -->
-    <div class="navbar navbar-blue navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="nav navbar-nav navbar-header" style="padding: 5px 0">
-                <a href="#" class="navbar-link">
-                    <img src="~/logo_menu.png" alt="Brand">
-                </a>
+<body>
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> tuananh603787@gmail.com</li>
+                                <li>Vạn Phúc - Hệ thống cung cấp nông sản số 1 Việt Nam</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            <div class="header__top__right__language">
+                                <img src="img/vietnam.png" width="35px" height="25px" alt="">
+                                <div>Tiếng Việt</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Tiếng Việt</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End main menu -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li class="active"><a href="./index.html">Trang chủ</a></li>
+                            <li><a href="#">Sản phẩm</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="./shop-details.html">Danh sách sản phẩm</a></li>
+                                    <li><a href="./shoping-cart.html">Giỏ hàng</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact.html">Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        </ul>
+                        <div class="header__cart__price">Tông thanh toán: <span>2,000,000 VND</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
+@RenderBody()
+<!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ:  Xóm 1, Xã Vạn Phúc, Huyện Ninh Giang, Tỉnh Hải Dương</li>
+                            <li>Điện thoại: 0220 3867 822</li>
+                            <li>Email: nongsanvanphuc@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Liên kết khác</h6>
+                        <ul>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Chính sách giao nhận hàng</a></li>
+                            <li><a href="#">Chính sách cửa hàng</a></li>
+                            <li><a href="#">Chỉ dẫn</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Đăng kí nhận báo giá</h6>
+                        <p>Hãy đăng kí để nhận được báo giá cũng như những ưu đãi sớm nhất từ cửa hàng chúng tôi.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Email của bạn">
+                            <button type="submit" class="site-btn">Đăng kí</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+<!-- Footer Section End -->
 
-    @RenderBody()
-
-
-    <!--ng-options="x.ten_khoa for x in ds_khoa_dt track by x.ma_khoa"-->
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 
 </body>
 </html>

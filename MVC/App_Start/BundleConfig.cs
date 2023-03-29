@@ -27,6 +27,13 @@ namespace MVC
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/elegant-icons.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/nice-select.css",
+                      "~/Content/owl.carousel.min.css",
+                      "~/Content/Site.css",
+                      "~/Content/slicknav.min.css",
                       "~/Content/style.css"));
         }
     }

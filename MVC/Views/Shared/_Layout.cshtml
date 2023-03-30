@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                        <a href="@Url.Action("MainPage", "Home")"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -59,8 +59,8 @@
                             <li class="active"><a href="./index.html">Trang chủ</a></li>
                             <li><a href="#">Sản phẩm</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Danh sách sản phẩm</a></li>
-                                    <li><a href="./shoping-cart.html">Giỏ hàng</a></li>
+                                    <li><a href="@Url.Action("MainPage", "Home")">Danh sách sản phẩm</a></li>
+                                    <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ hàng</a></li>
                                 </ul>
                             </li>
                             <li><a href="./contact.html">Liên hệ</a></li>
@@ -71,7 +71,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="@Url.Action("ShoppingCart", "Home")"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <div class="header__cart__price">Tông thanh toán: <span>2,000,000 VND</span></div>
                     </div>
@@ -91,7 +91,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                            <a href="@Url.Action("MainPage", "Home")"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
                         </div>
                         <ul>
                             <li>Địa chỉ:  Xóm 1, Xã Vạn Phúc, Huyện Ninh Giang, Tỉnh Hải Dương</li>

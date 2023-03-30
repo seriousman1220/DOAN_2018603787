@@ -22,7 +22,7 @@ namespace MVC
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/angular.min.js",
-                      
+                      "~/Scripts/Client/MainPage.js",
                       "~/Scripts/script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

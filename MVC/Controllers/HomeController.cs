@@ -17,5 +17,10 @@ namespace MVC.Controllers
         {
             return View();
         }
+
+        public ActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }

@@ -1126,10 +1126,10 @@ ol {
 
 .price-range-wrap .range-slider .price-input:after {
 	position: absolute;
-	left: 38px;
-	top: 13px;
+	left: 72px;
+	top: 11px;
 	height: 1px;
-	width: 5px;
+	width: 15px;
 	background: #dd2222;
 	content: "";
 }
@@ -1138,7 +1138,7 @@ ol {
 	font-size: 16px;
 	color: #dd2222;
 	font-weight: 700;
-	max-width: 20%;
+	max-width: 30%;
 	border: none;
 	display: inline-block;
 }

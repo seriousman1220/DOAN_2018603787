@@ -27,5 +27,24 @@ namespace MVC.Controllers
         {
             return PartialView();
         }
+        public ActionResult CheckOut()
+        {
+            return PartialView();
+        }
+        public ActionResult Contact()
+        {
+            return PartialView();
+        }
+        public ActionResult ProductDetails(string id)
+        {
+            return View();
+        }
+        public ActionResult ListProduct()
+        {
+            return View();
+        }
+
+
+
     }
 }

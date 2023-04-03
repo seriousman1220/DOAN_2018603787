@@ -1,317 +1,325 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
 
-<!-- navigation -->
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="nav navbar-nav navbar-header">
-            <h4 class="navbar-text" style="margin-left: 0; font-size: 16px">Kết quả đánh giá khóa đào tạo</h4>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-btn">
-                <button class="btn btn-primary no-border" ng-click="RefeshData()">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </button>
-            </li>
-            <li class="navbar-btn">
-                <button class="btn btn-primary no-border" ng-click="ShowAddEmpForm()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </li>
-            <li class="navbar-btn">
-                <button class="btn btn-primary no-border" ng-click="ShowEditEmpForm()">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </button>
-            </li>
-            <li class="navbar-btn">
-                <button class="btn btn-primary no-border">
-                    <span class="glyphicon glyphicon-duplicate"></span>
-                </button>
-            </li>
-            <li class="navbar-btn">
-                <button class="btn btn-warning no-border" ng-click="RemoveAllSelected()">
-                    <span class="glyphicon glyphicon-trash text-danger"></span>
-                </button>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- end navigation -->
-<!-- content -->
-<div class="content">
-    <div class="search">
-        <div class="input-group">
-            <input type="text" ng-model="key_search" class="form-control" placeholder="Nhập thông tin tìm kiếm" ng-keypress="enterSearch($event)">
-            <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="Filter_Yn = !Filter_Yn">
-                    <span style="font-size: 10px" ng-class="{ 'glyphicon-chevron-down': !Filter_Yn, 'glyphicon-chevron-up': Filter_Yn }" class="glyphicon"></span>
-                </button>
-            </span>
-            <span class="input-group-btn">
-                <button class="btn btn-primary" ng-click="Search(key_search)"><span class="glyphicon glyphicon-search"></span></button>
-            </span>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <!-- navigation -->
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="nav navbar-nav navbar-header">
+                <h4 class="navbar-text" style="margin-left: 0; font-size: 16px">Kết quả đánh giá khóa đào tạo</h4>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-btn">
+                    <button class="btn btn-primary no-border" ng-click="RefeshData()">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                </li>
+                <li class="navbar-btn">
+                    <button class="btn btn-primary no-border" ng-click="ShowAddEmpForm()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </li>
+                <li class="navbar-btn">
+                    <button class="btn btn-primary no-border" ng-click="ShowEditEmpForm()">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                </li>
+                <li class="navbar-btn">
+                    <button class="btn btn-primary no-border">
+                        <span class="glyphicon glyphicon-duplicate"></span>
+                    </button>
+                </li>
+                <li class="navbar-btn">
+                    <button class="btn btn-warning no-border" ng-click="RemoveAllSelected()">
+                        <span class="glyphicon glyphicon-trash text-danger"></span>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="filter" ng-hide="!Filter_Yn">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="form-group">
-                    <label for="" class="control-label">Khóa đào tạo</label>
-                    <select ng-model="filter.courses" class="form-control" ng-change="AdvancedSearch()">
-                        <option value="" selected>-- Chọn khóa đào tạo --</option>
-                        <option ng-repeat="course in courses" ng-bind="course.name" value="{{course.id}}"></option>
-                    </select>
-                </div>
+    <!-- end navigation -->
+    <!-- content -->
+    <div class="content">
+        <div class="search">
+            <div class="input-group">
+                <input type="text" ng-model="key_search" class="form-control" placeholder="Nhập thông tin tìm kiếm" ng-keypress="enterSearch($event)">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="Filter_Yn = !Filter_Yn">
+                        <span style="font-size: 10px" ng-class="{ 'glyphicon-chevron-down': !Filter_Yn, 'glyphicon-chevron-up': Filter_Yn }" class="glyphicon"></span>
+                    </button>
+                </span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="Search(key_search)"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="form-group">
-                    <label for="" class="control-label">Ngày đánh giá</label>
-                    <input type="date" ng-model="filter.rating_date" class="form-control" ng-change="AdvancedSearch()" />
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="form-group">
-                    <label for="" class="control-label">Bộ phận</label>
-                    <select ng-model="filter.department" class="form-control" ng-change="AdvancedSearch()">
-                        <option value="" selected>-- Chọn bộ phận --</option>
-                        <option ng-repeat="department in departments" ng-bind="department.name" value="{{department.id}}"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        </div>
+        <div class="filter" ng-hide="!Filter_Yn">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="form-group">
-                        <label for="" class="control-label">Tổng điểm từ</label>
-                        <input type="number" ng-model="filter.from_mark" class="form-control" ng-change="AdvancedSearch()" />
+                        <label for="" class="control-label">Khóa đào tạo</label>
+                        <select ng-model="filter.courses" class="form-control" ng-change="AdvancedSearch()">
+                            <option value="" selected>-- Chọn khóa đào tạo --</option>
+                            <option ng-repeat="course in courses" ng-bind="course.name" value="{{course.id}}"></option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="form-group">
-                        <label for="" class="control-label">Tổng điểm đến</label>
-                        <input type="number" ng-model="filter.to_mark" class="form-control" ng-change="AdvancedSearch()" />
+                        <label for="" class="control-label">Ngày đánh giá</label>
+                        <input type="date" ng-model="filter.rating_date" class="form-control" ng-change="AdvancedSearch()" />
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="" class="control-label">Bộ phận</label>
+                        <select ng-model="filter.department" class="form-control" ng-change="AdvancedSearch()">
+                            <option value="" selected>-- Chọn bộ phận --</option>
+                            <option ng-repeat="department in departments" ng-bind="department.name" value="{{department.id}}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="" class="control-label">Tổng điểm từ</label>
+                            <input type="number" ng-model="filter.from_mark" class="form-control" ng-change="AdvancedSearch()" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="" class="control-label">Tổng điểm đến</label>
+                            <input type="number" ng-model="filter.to_mark" class="form-control" ng-change="AdvancedSearch()" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="info">
-        <div style="padding: 5px;">
-            Tổng số bản ghi: <span ng-bind="emp_list.length"></span>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th><input type="checkbox" ng-model="select_all" ng-click="SelectAllRow()"></th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
-                        <th>Mã khóa đào tạo</th>
-                        <th>Tên khóa đào tạo</th>
-                        <th>Tên nhân viên</th>
-                        <th>Bộ phận</th>
-                        <th>Ngày đánh giá</th>
-                        <th>Tên người hướng dẫn</th>
-                        <th>Tổng diểm</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="emp in emp_list" ng-dblclick="Detail($index)" ng-click="emp.selected = !emp.selected" ng-style="emp.total < 5 && {'background-color': '#fa6565'} || emp.total < 7 && {'background-color': '#f8ef2d'}" style="background-color: #21c54a" ng-class="{hover: emp.selected}">
-                        <td style="text-align: center" ng-bind="$index + 1"></td>
-                        <td style="text-align: center"><input type="checkbox" ng-model="emp.selected" ng-click="emp.selected = !emp.selected" /></td>
-                        <td style="text-align: center"><span class="text-primary glyphicon glyphicon-pencil" ng-click="Detail($index)"></span></td>
-                        <td style="text-align: center"><span class="text-danger glyphicon glyphicon-trash" ng-click="Remove($index)"></span></td>
-                        <td ng-bind="emp.course.id"></td>
-                        <td ng-bind="emp.course.name"></td>
-                        <td ng-bind="emp.employee.name"></td>
-                        <td ng-bind="emp.department.name"></td>
-                        <td ng-bind="emp.rating_date | date: 'dd/MM/yyyy'"></td>
-                        <td ng-bind="emp.instructor"></td>
-                        <td ng-bind="emp.total"></td>
-                        <td ng-bind="emp.status.name"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal cha-->
-<div class="modal" id="emp_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-full">
-        <div class="modal-content">
-            <!-- modal_header -->
-            <div class="modal-header modal-header-lg">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <div class="modal-title text-center text-primary"><b>Cập nhật kết quả đánh giá nhân viên</b></div>
+        <div class="info">
+            <div style="padding: 5px;">
+                Tổng số bản ghi: <span ng-bind="emp_list.length"></span>
             </div>
-            <!-- end modal_header -->
-            <!-- modal-body -->
-            <div class="modal-body modal-body-scrollable">
-                <form name="emp_form">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <input type="text" hidden ng-model="nemp.id" />
-                            <label for="" class="control-label">Khóa đào tạo<span class="required">*</span></label>
-                            <select class="form-control" name="course" ng-model="nemp.course" ng-options="x.name for x in courses track by x.id"></select>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Từ ngày</label>
-                            <input type="date" ng-model="nemp.course.from_date" class="form-control" />
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Đến ngày</label>
-                            <input type="date" ng-model="nemp.course.to_date" class="form-control" />
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Người hướng dẫn</label>
-                            <input type="text" ng-model="nemp.instructor" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Mã nhân viên<span class="required">*</span></label>
-                            <input type="text" ng-model="nemp.employee.id" name="emp_id" class="form-control" ng-pattern="/^([A-Z0-9-_])+$/" required />
-                            <div class="error" ng-show="emp_form.emp_id.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
-                            <div class="error" ng-show="emp_form.emp_id.$error.pattern">Chỉ được nhập các ký tự viết hoa, chữ số hoặc dấu -, _</div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Tên nhân viên<span class="required">*</span></label>
-                            <input type="text" ng-model="nemp.employee.name" name="emp_name" class="form-control text-capitalize" required />
-                            <div class="error" ng-show="emp_form.emp_name.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Bộ phận</label>
-                            <select class="form-control" name="department" ng-model="nemp.department" ng-options="x.name for x in departments track by x.id" ng-change="TinhTongDiem()">
-                            </select>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Điểm cộng</label>
-                            <input type="text" ng-model="nemp.department.bonus_mark" name="bonus_mark" class="form-control" value="0" disabled />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Ngày đánh giá<span class="required">*</span></label>
-                            <input type="date" ng-model="nemp.rating_date" name="rating_date" class="form-control" required />
-                            <div class="error" ng-show="emp_form.rating_date.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Trạng thái</label>
-                            <select ng-model="nemp.status" class="form-control" ng-options="x.name for x in status_list track by x.id">
-                            </select>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="" class="control-label">Tổng điểm</label>
-                            <input type="text" ng-model="nemp.total" name="total" class="form-control" value="0" disabled />
-                        </div>
-                    </div>
-                </form>
-
-                <table class="table table-bordered">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th><span class="text-primary glyphicon glyphicon-plus" ng-click="ShowAddCtForm(nemp.id)"></span></th>
+                            <th>STT</th>
+                            <th><input type="checkbox" ng-model="select_all" ng-click="SelectAllRow()"></th>
                             <th>Sửa</th>
                             <th>Xóa</th>
-                            <th>Mã chỉ tiêu</th>
-                            <th>Tên chỉ tiêu</th>
-                            <th>Hệ số</th>
-                            <th>Điểm</th>
-                            <th>Điểm quy đổi</th>
-                            <th>Nhận xét</th>
+                            <th>Mã khóa đào tạo</th>
+                            <th>Tên khóa đào tạo</th>
+                            <th>Tên nhân viên</th>
+                            <th>Bộ phận</th>
+                            <th>Ngày đánh giá</th>
+                            <th>Tên người hướng dẫn</th>
+                            <th>Tổng diểm</th>
+                            <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="ct in nemp.ct" ng-dblclick="DetailCt($index)">
+                        <tr ng-repeat="emp in emp_list" ng-dblclick="Detail($index)" ng-click="emp.selected = !emp.selected" ng-style="emp.total < 5 && {'background-color': '#fa6565'} || emp.total < 7 && {'background-color': '#f8ef2d'}" style="background-color: #21c54a" ng-class="{hover: emp.selected}">
                             <td style="text-align: center" ng-bind="$index + 1"></td>
-                            <td style="text-align: center"><span class="text-primary glyphicon glyphicon-pencil" ng-click="DetailCt($index)"></span></td>
-                            <td style="text-align: center"><span class="text-danger glyphicon glyphicon-trash" ng-click="RemoveCt($index)"></span></td>
-                            <td ng-bind="ct.id"></td>
-                            <td ng-bind="ct.name"></td>
-                            <td ng-bind="ct.he_so"></td>
-                            <td ng-bind="ct.diem"></td>
-                            <td ng-bind="ct.diem_qd"></td>
-                            <td ng-bind="ct.comment"></td>
+                            <td style="text-align: center"><input type="checkbox" ng-model="emp.selected" ng-click="emp.selected = !emp.selected" /></td>
+                            <td style="text-align: center"><span class="text-primary glyphicon glyphicon-pencil" ng-click="Detail($index)"></span></td>
+                            <td style="text-align: center"><span class="text-danger glyphicon glyphicon-trash" ng-click="Remove($index)"></span></td>
+                            <td ng-bind="emp.course.id"></td>
+                            <td ng-bind="emp.course.name"></td>
+                            <td ng-bind="emp.employee.name"></td>
+                            <td ng-bind="emp.department.name"></td>
+                            <td ng-bind="emp.rating_date | date: 'dd/MM/yyyy'"></td>
+                            <td ng-bind="emp.instructor"></td>
+                            <td ng-bind="emp.total"></td>
+                            <td ng-bind="emp.status.name"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- end modal-body -->
-            <!-- modal-footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="SaveEmp()">Lưu</button>
-                <button type="button" class="btn btn-default" ng-click="SaveCopyEmp()" ng-show="Add_Yn">Lưu và Copy</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="ResetEmpForm()">Đóng</button>
-            </div>
-            <!-- end modal-footer -->
         </div>
     </div>
-</div>
-<!-- End modal cha -->
-<!-- Modal con-->
-<div class="modal" id="ct_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- modal_header -->
-            <div class="modal-header modal-header-lg">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <div class="modal-title text-center text-primary"><b>Cập nhật Chỉ tiêu đánh giá</b></div>
+
+
+    <!-- Modal cha-->
+    <div class="modal" id="emp_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-full">
+            <div class="modal-content">
+                <!-- modal_header -->
+                <div class="modal-header modal-header-lg">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <div class="modal-title text-center text-primary"><b>Cập nhật kết quả đánh giá nhân viên</b></div>
+                </div>
+                <!-- end modal_header -->
+                <!-- modal-body -->
+                <div class="modal-body modal-body-scrollable">
+                    <form name="emp_form">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <input type="text" hidden ng-model="nemp.id" />
+                                <label for="" class="control-label">Khóa đào tạo<span class="required">*</span></label>
+                                <select class="form-control" name="course" ng-model="nemp.course" ng-options="x.name for x in courses track by x.id"></select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Từ ngày</label>
+                                <input type="date" ng-model="nemp.course.from_date" class="form-control" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Đến ngày</label>
+                                <input type="date" ng-model="nemp.course.to_date" class="form-control" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Người hướng dẫn</label>
+                                <input type="text" ng-model="nemp.instructor" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Mã nhân viên<span class="required">*</span></label>
+                                <input type="text" ng-model="nemp.employee.id" name="emp_id" class="form-control" ng-pattern="/^([A-Z0-9-_])+$/" required />
+                                <div class="error" ng-show="emp_form.emp_id.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
+                                <div class="error" ng-show="emp_form.emp_id.$error.pattern">Chỉ được nhập các ký tự viết hoa, chữ số hoặc dấu -, _</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Tên nhân viên<span class="required">*</span></label>
+                                <input type="text" ng-model="nemp.employee.name" name="emp_name" class="form-control text-capitalize" required />
+                                <div class="error" ng-show="emp_form.emp_name.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Bộ phận</label>
+                                <select class="form-control" name="department" ng-model="nemp.department" ng-options="x.name for x in departments track by x.id" ng-change="TinhTongDiem()">
+                                </select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Điểm cộng</label>
+                                <input type="text" ng-model="nemp.department.bonus_mark" name="bonus_mark" class="form-control" value="0" disabled />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Ngày đánh giá<span class="required">*</span></label>
+                                <input type="date" ng-model="nemp.rating_date" name="rating_date" class="form-control" required />
+                                <div class="error" ng-show="emp_form.rating_date.$error.required && ClickSave">Trường này bắt buộc nhập*</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Trạng thái</label>
+                                <select ng-model="nemp.status" class="form-control" ng-options="x.name for x in status_list track by x.id">
+                                </select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label for="" class="control-label">Tổng điểm</label>
+                                <input type="text" ng-model="nemp.total" name="total" class="form-control" value="0" disabled />
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><span class="text-primary glyphicon glyphicon-plus" ng-click="ShowAddCtForm(nemp.id)"></span></th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                                <th>Mã chỉ tiêu</th>
+                                <th>Tên chỉ tiêu</th>
+                                <th>Hệ số</th>
+                                <th>Điểm</th>
+                                <th>Điểm quy đổi</th>
+                                <th>Nhận xét</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ct in nemp.ct" ng-dblclick="DetailCt($index)">
+                                <td style="text-align: center" ng-bind="$index + 1"></td>
+                                <td style="text-align: center"><span class="text-primary glyphicon glyphicon-pencil" ng-click="DetailCt($index)"></span></td>
+                                <td style="text-align: center"><span class="text-danger glyphicon glyphicon-trash" ng-click="RemoveCt($index)"></span></td>
+                                <td ng-bind="ct.id"></td>
+                                <td ng-bind="ct.name"></td>
+                                <td ng-bind="ct.he_so"></td>
+                                <td ng-bind="ct.diem"></td>
+                                <td ng-bind="ct.diem_qd"></td>
+                                <td ng-bind="ct.comment"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end modal-body -->
+                <!-- modal-footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="SaveEmp()">Lưu</button>
+                    <button type="button" class="btn btn-default" ng-click="SaveCopyEmp()" ng-show="Add_Yn">Lưu và Copy</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="ResetEmpForm()">Đóng</button>
+                </div>
+                <!-- end modal-footer -->
             </div>
-            <!-- end modal_header -->
-            <!-- modal-body -->
-            <div class="modal-body modal-body-scrollable">
-                <form name="ct_form">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                        <label for="" class="control-label">Mã chỉ tiêu<span class="required">*</span></label>
-                        <input type="text" ng-model="nct.id" name="id" class="form-control" disabled />
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                        <label for="" class="control-label">Tên chỉ tiêu<span class="required">*</span></label>
-                        <input type="text" ng-model="nct.name" name="ct_name" class="form-control" required />
-                        <div class="error" ng-show="ct_form.ct_name.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
-                        <label for="" class="control-label">Hệ số<span class="required">*</span></label>
-                        <input type="number" ng-model="nct.he_so" name="he_so" class="form-control" ng-change="TinhDiemQD()" required />
-                        <div class="error" ng-show="ct_form.he_so.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
-                        <label for="" class="control-label">Điểm<span class="required">*</span></label>
-                        <input type="number" ng-model="nct.diem" name="mark" class="form-control" ng-change="TinhDiemQD()" required />
-                        <div class="error" ng-show="ct_form.mark.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
-                        <div class="error" ng-show="error_mark">Điểm phải thuộc từ khoảng 0 -> 10</div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
-                        <label for="" class="control-label">Điểm quy đổi</label>
-                        <input type="number" ng-model="nct.diem_qd" class="form-control" disabled />
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                        <label for="" class="control-label">Nhận xét</label>
-                        <input type="text" ng-model="nct.comment" name="comment" class="form-control" />
-                    </div>
-                </form>
-            </div>
-            <!-- end modal-body -->
-            <!-- modal-footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="SaveCt()" ng-disabled="disabled">Lưu</button>
-                <button type="button" class="btn btn-default" ng-click="SaveAddCt()" ng-show="Add_ct_yn" ng-disabled="disabled">Lưu và Thêm</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Đóng</button>
-            </div>
-            <!-- end modal-footer -->
         </div>
     </div>
-</div>
-<!-- End modal con -->
-<!-- end content -->
+    <!-- End modal cha -->
+    <!-- Modal con-->
+    <div class="modal" id="ct_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- modal_header -->
+                <div class="modal-header modal-header-lg">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <div class="modal-title text-center text-primary"><b>Cập nhật Chỉ tiêu đánh giá</b></div>
+                </div>
+                <!-- end modal_header -->
+                <!-- modal-body -->
+                <div class="modal-body modal-body-scrollable">
+                    <form name="ct_form">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                            <label for="" class="control-label">Mã chỉ tiêu<span class="required">*</span></label>
+                            <input type="text" ng-model="nct.id" name="id" class="form-control" disabled />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                            <label for="" class="control-label">Tên chỉ tiêu<span class="required">*</span></label>
+                            <input type="text" ng-model="nct.name" name="ct_name" class="form-control" required />
+                            <div class="error" ng-show="ct_form.ct_name.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="" class="control-label">Hệ số<span class="required">*</span></label>
+                            <input type="number" ng-model="nct.he_so" name="he_so" class="form-control" ng-change="TinhDiemQD()" required />
+                            <div class="error" ng-show="ct_form.he_so.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="" class="control-label">Điểm<span class="required">*</span></label>
+                            <input type="number" ng-model="nct.diem" name="mark" class="form-control" ng-change="TinhDiemQD()" required />
+                            <div class="error" ng-show="ct_form.mark.$error.required && ClickCtSave">Trường này bắt buộc nhập*</div>
+                            <div class="error" ng-show="error_mark">Điểm phải thuộc từ khoảng 0 -> 10</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                            <label for="" class="control-label">Điểm quy đổi</label>
+                            <input type="number" ng-model="nct.diem_qd" class="form-control" disabled />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                            <label for="" class="control-label">Nhận xét</label>
+                            <input type="text" ng-model="nct.comment" name="comment" class="form-control" />
+                        </div>
+                    </form>
+                </div>
+                <!-- end modal-body -->
+                <!-- modal-footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="SaveCt()" ng-disabled="disabled">Lưu</button>
+                    <button type="button" class="btn btn-default" ng-click="SaveAddCt()" ng-show="Add_ct_yn" ng-disabled="disabled">Lưu và Thêm</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Đóng</button>
+                </div>
+                <!-- end modal-footer -->
+            </div>
+        </div>
+    </div>
+    <!-- End modal con -->
+    <!-- end content -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+

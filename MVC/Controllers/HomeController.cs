@@ -10,7 +10,7 @@ namespace MVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
 
         public ActionResult MainPage()

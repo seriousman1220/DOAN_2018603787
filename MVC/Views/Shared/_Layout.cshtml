@@ -56,21 +56,21 @@
                         <ul>
                             <li></li>
                             <li></li>
-                            <li class="active"><a href="./index.html">Trang chủ</a></li>
-                            <li><a href="#">Sản phẩm</a>
+                            <li class="active"><a href="@Url.Action("MainPage", "Home")">Trang chủ</a></li>
+                            <li><a href="@Url.Action("MainPage", "Home")">Sản phẩm</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="@Url.Action("ListProduct", "Home")">Danh sách sản phẩm</a></li>
                                     <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ hàng</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li><a href="./Contact.cshtml">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li></li>
                             <li><a href="@Url.Action("ShoppingCart", "Home")"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <div class="header__cart__price">Tông thanh toán: <span>2,000,000 VND</span></div>
@@ -83,7 +83,7 @@
         </div>
     </header>
 
-@RenderBody()
+        @RenderBody()
 <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
@@ -131,8 +131,8 @@
     </footer>
 <!-- Footer Section End -->
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
 </body>
 </html>

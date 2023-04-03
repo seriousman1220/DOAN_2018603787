@@ -23,6 +23,7 @@ namespace MVC
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/angular.min.js",
                       "~/Scripts/Client/MainPage.js",
+                      "~/Scripts/Admin/js/login.js",
                       "~/Scripts/script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

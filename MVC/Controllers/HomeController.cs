@@ -15,33 +15,30 @@ namespace MVC.Controllers
 
         public ActionResult MainPage()
         {
-            return View();
+            return PartialView("MainPage");
         }
 
         public ActionResult ShoppingCart()
         {
-            return View();
+            return PartialView("ShoppingCart");
         }
 
-        public ActionResult Login()
-        {
-            return PartialView();
-        }
+       
         public ActionResult CheckOut()
         {
-            return PartialView();
+            return PartialView("CheckOut");
         }
         public ActionResult Contact()
         {
-            return PartialView();
+            return PartialView("Contact");
         }
-        public ActionResult ProductDetails(string id)
+        public ActionResult ProductDetails()
         {
-            return View();
+            return PartialView("ProductDetails");
         }
         public ActionResult ListProduct()
         {
-            return View();
+            return PartialView("ListProduct");
         }
 
 

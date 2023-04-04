@@ -1,4 +1,5 @@
-﻿angular.module('LoginApp', ['angular-growl']).controller('LoginController', ['$scope', '$http', 'growl', function ($scope, $http, growl) {
+﻿var app = angular.module('LoginApp', ['angular-growl']);
+app.controller('LoginController', ['$scope', '$http', 'growl', '$window', function ($scope, $http, growl, $window) {
     console.log('LoginController: ready');
 
 
@@ -17,7 +18,12 @@
             }
         }).then(function (response) {
             console.log(response.data);
+
             growl.info(response.data);
+            $window.location.href = '/Home/MainPage';
+            sessionStorage.username = $scope.username;
+            sessionStorage.qty_cart = 10;
+
 
         })
     }

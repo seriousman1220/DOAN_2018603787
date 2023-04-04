@@ -1,28 +1,17 @@
 ﻿angular.module('MainPageApp', []).controller('MainPageController', ['$scope', '$http', function ($scope, $http) {
     console.log('MainPageController: ready');
 
-   
+    //Khai báo
+    $scope.user = '';
+    $scope.login_yn = false;
 
     $scope.LoadData = function () {
         $http({
             method: 'GET',
-            url: '/API/api/myAPI/LoadData/'
+            url: '/API/api/MainPage/LoadData/'
         }).then(function (response) {
-            $scope.departments = response.data.departments;
-            $scope.status_list = response.data.status_list;
             $scope.courses = response.data.courses;
-            for (var i = 0; i < $scope.courses.length; i++) {
-                $scope.courses[i].from_date = new Date($scope.courses[i].from_date);
-                $scope.courses[i].to_date = new Date($scope.courses[i].to_date);
-            }
-
-            $scope.emp_list = response.data.dmchitieus;
-            for (var i = 0; i < $scope.emp_list.length; i++) {
-                $scope.emp_list[i].course.from_date = new Date($scope.emp_list[i].course.from_date);
-                $scope.emp_list[i].course.to_date = new Date($scope.emp_list[i].course.to_date);
-                $scope.emp_list[i].rating_date = new Date($scope.emp_list[i].rating_date);
-            }
-            console.log($scope.emp_list);
+            console.log(response.data.courses);
         }, function (error) {
             console.log('Error: ' + error);
         });
@@ -40,7 +29,16 @@
     }
 
     $scope.init = function () {
-        $scope.LoadData();
+        if (sessionStorage.username === undefined) {
+            $scope.LoadData();
+        }
+        else {
+            $scope.login_yn = true;
+            $scope.user = sessionStorage.username;
+            $scope.qty_cart = sessionStorage.qty_cart == null ? 0 : sessionStorage.qty_cart;
+            $scope.LoadData();
+
+        }
     }
     $scope.init();
 }]);

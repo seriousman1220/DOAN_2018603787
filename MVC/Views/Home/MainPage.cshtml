@@ -12,6 +12,8 @@
     <!-- Google Font -->
     @*<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">*@
     <!-- Css Styles -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/elegant-icons.css" type="text/css">
@@ -28,55 +30,81 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="~/img/vanphuc.jpg" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="@Url.Action("ShoppingCart", "Home")"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> tuananh603787@gmail.com</li>
+                                <li>Vạn Phúc - Hệ thống cung cấp nông sản số 1 Việt Nam</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                            <div class="header__top__right__language">
+                                <img src="img/vietnam.png" width="35px" height="25px" alt="">
+                                <div>Tiếng Việt</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Tiếng Việt</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a ng-show="!login_yn" href="@Url.Action("LoginPage", "Admin")"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <a ng-show="login_yn" href="@Url.Action("LoginPage", "Admin")"><i class="fa fa-user"></i> Xin chào, {{user}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Trang chủ</a></li>
-                <li><a href="./shop-grid.html">Sản phẩm</a></li>
-                <li><a href="#">Bài viết</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="~/Views/Home/ShoppingCart.cshtml">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./contact.html">Liên hệ</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="@Url.Action("MainPage", "Home")"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li class="active"><a href="@Url.Action("MainPage", "Home")">Trang chủ</a></li>
+                            <li>
+                                <a href="@Url.Action("MainPage", "Home")">Sản phẩm</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="@Url.Action("ListProduct", "Home")">Danh sách sản phẩm</a></li>
+                                    <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ hàng</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./Contact.cshtml">Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li></li>
+                            <li><a href="@Url.Action("ShoppingCart", "Home")"><i class="fa fa-shopping-bag"></i> <span>{{qty_cart}}</span></a></li>
+                        </ul>
+                        <div class="header__cart__price">Tông thanh toán: <span>2,000,000 VND</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
         </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
+    </header>
 
 
     <!-- Hero Section Begin -->
@@ -89,13 +117,14 @@
                             <i class="fa fa-bars"></i>
                             <span>Danh mục</span>
                         </div>
-                        <ul>
-                            <li><a href="#">Rau xanh</a></li>
+                        <ul ng-repeat="c in courses">
+                            @*<li><a href="#">Rau xanh</a></li>
                             <li><a href="#">Hạt cứng, đậu các loại</a></li>
                             <li><a href="#">Chè xanh</a></li>
                             <li><a href="#">Quả nhiệt đới</a></li>
                             <li><a href="#">Thực phẩm đóng hộp</a></li>
-                            <li><a href="#">Đồ đông lạnh</a></li>
+                            <li><a href="#">Đồ đông lạnh</a></li>*@
+                            <li><a href="" ng-bind="c.name"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,7 +132,7 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                
+
                                 <input type="text" placeholder="Nhập sản phẩm bạn cần tìm">
                                 <button type="submit" class="site-btn">Tìm kiếm</button>
                             </form>
@@ -131,9 +160,6 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
-   
-
     <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
@@ -150,7 +176,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -165,7 +191,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -180,7 +206,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -195,7 +221,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -210,7 +236,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -225,7 +251,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -240,7 +266,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -255,7 +281,7 @@
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
- 
+
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -269,7 +295,6 @@
         </div>
     </section>
     <!-- Featured Section End -->
-
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
@@ -288,7 +313,6 @@
         </div>
     </div>
     <!-- Banner End -->
-
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
         <div class="container">
@@ -492,10 +516,58 @@
         </div>
     </section>
     <!-- Latest Product Section End -->
-
     <!-- Blog Section Begin -->
     <!-- Blog Section End -->
     <!-- Js Plugins -->
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="@Url.Action("MainPage", "Home")"><img src="~/img/vanphuc.jpg" height="100px" width="100px" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ:  Xóm 1, Xã Vạn Phúc, Huyện Ninh Giang, Tỉnh Hải Dương</li>
+                            <li>Điện thoại: 0220 3867 822</li>
+                            <li>Email: nongsanvanphuc@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Liên kết khác</h6>
+                        <ul>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Chính sách giao nhận hàng</a></li>
+                            <li><a href="#">Chính sách cửa hàng</a></li>
+                            <li><a href="#">Chỉ dẫn</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Đăng kí nhận báo giá</h6>
+                        <p>Hãy đăng kí để nhận được báo giá cũng như những ưu đãi sớm nhất từ cửa hàng chúng tôi.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Email của bạn">
+                            <button type="submit" class="site-btn">Đăng kí</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.nice-select.min.js"></script>

@@ -137,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\css\styles.css" />
+    <Content Include="Content\angular-growl.css" />
+    <Content Include="Content\angular-growl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -365,6 +367,8 @@
     <Content Include="Scripts\Admin\js\login.js" />
     <Content Include="Scripts\Admin\js\scripts.js" />
     <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-growl.js" />
+    <Content Include="Scripts\angular-growl.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

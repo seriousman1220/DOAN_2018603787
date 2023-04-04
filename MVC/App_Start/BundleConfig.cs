@@ -22,6 +22,8 @@ namespace MVC
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/angular.min.js",
+                       "~/Scripts/angular-growl.min.js",
+                      "~/Scripts/angular-growl.js",
                       "~/Scripts/Client/MainPage.js",
                       "~/Scripts/Admin/js/login.js",
                       "~/Scripts/script.js"));
@@ -35,6 +37,9 @@ namespace MVC
                       "~/Content/owl.carousel.min.css",
                       "~/Content/Site.css",
                       "~/Content/slicknav.min.css",
+                      "~/Content/angular-growl.min.css",
+                      "~/Content/angular-growl.css",
+
                       "~/Content/style.css"));
         }
     }

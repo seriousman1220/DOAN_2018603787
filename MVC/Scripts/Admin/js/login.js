@@ -1,9 +1,9 @@
-﻿angular.module('LoginApp', []).controller('LoginController', ['$scope', '$http', function ($scope, $http) {
+﻿angular.module('LoginApp', ['angular-growl']).controller('LoginController', ['$scope', '$http', 'growl', function ($scope, $http, growl) {
     console.log('LoginController: ready');
 
 
-
     $scope.CheckLogin = function () {
+
         var user_check = {
             user: $scope.username,
             password: $scope.password,
@@ -17,6 +17,7 @@
             }
         }).then(function (response) {
             console.log(response.data);
+            growl.info(response.data);
 
         })
     }

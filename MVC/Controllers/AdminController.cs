@@ -11,7 +11,7 @@ namespace MVC.Controllers
         // GET: Admin
         public ActionResult Dashboard()
         {
-            return View();
+            return PartialView();
         }
         public ActionResult LoginPage()
         {
@@ -20,11 +20,11 @@ namespace MVC.Controllers
 
         public ActionResult Register()
         {
-            return View();
+            return PartialView("Register");
         }
         public ActionResult Password()
         {
-            return View();
+            return PartialView("Password");
         }
 
         public ActionResult DHBan() { return View(); }

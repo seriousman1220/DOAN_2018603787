@@ -477,12 +477,12 @@
     <Content Include="Views\Admin\404.html" />
     <Content Include="Views\Admin\500.html" />
     <Content Include="Views\Admin\charts.html" />
-    <Content Include="Views\Admin\index.html" />
+    <None Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\layout-sidenav-light.html" />
     <Content Include="Views\Admin\layout-static.html" />
     <None Include="Views\Admin\LoginPage.cshtml" />
-    <None Include="Views\Admin\password.cshtml" />
-    <None Include="Views\Admin\register.cshtml" />
+    <None Include="Views\Admin\Password.cshtml" />
+    <None Include="Views\Admin\Register.cshtml" />
     <Content Include="Views\Admin\tables.html" />
     <Content Include="Views\Home\Login.cshtml" />
     <None Include="Views\Home\MainPage.cshtml" />

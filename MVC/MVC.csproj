@@ -400,6 +400,7 @@
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-growl.js" />
     <Content Include="Scripts\angular-growl.min.js" />
+    <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -483,6 +484,8 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Client\ShoppingCart.js" />
+    <Content Include="Scripts\Client\ListProduct.js" />
     <Content Include="Scripts\Client\MainPage.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

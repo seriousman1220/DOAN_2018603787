@@ -24,7 +24,9 @@ namespace MVC
                       "~/Scripts/angular.min.js",
                        "~/Scripts/angular-growl.min.js",
                       "~/Scripts/angular-growl.js",
+                      "~/Scripts/angular-route.js",
                       "~/Scripts/Client/MainPage.js",
+                      "~/Scripts/Client/ListProduct.js",
                       "~/Scripts/Admin/js/login.js",
                       "~/Scripts/script.js"));
 

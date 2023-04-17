@@ -1,4 +1,4 @@
-﻿var app = angular.module('LoginApp', ['angular-growl']);
+﻿var app = angular.module('LoginApp', ['angular-growl', 'ngRoute']);
 app.controller('LoginController', ['$scope', '$http', 'growl', '$window', function ($scope, $http, growl, $window) {
     console.log('LoginController: ready');
 

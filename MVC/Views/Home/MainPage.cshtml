@@ -96,7 +96,7 @@
                             <li></li>
                             <li><a href="@Url.Action("ShoppingCart", "Home")"><i class="fa fa-shopping-bag"></i> <span>{{qty_cart}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">Tông thanh toán: <span>2,000,000 VND</span></div>
+                        <div class="header__cart__price">Tông thanh toán: <span>{{total}} VND</span></div>
                     </div>
                 </div>
             </div>
@@ -133,8 +133,8 @@
                         <div class="hero__search__form">
                             <form action="#">
 
-                                <input type="text" placeholder="Nhập sản phẩm bạn cần tìm">
-                                <button type="submit" class="site-btn">Tìm kiếm</button>
+                                <input type="text" placeholder="Nhập sản phẩm bạn cần tìm" ng-model="search_key">
+                                <button type="submit" class="site-btn" ng-click="Search()">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -152,7 +152,7 @@
                             <span>Nông sản Vạn phúc</span>
                             <h2>Rau xanh <br />100% đến từ nông trại</h2>
                             <p>Đảm bảo nguồn gốc xuất xứ và quy trình trồng, thu hoạch</p>
-                            <a href="#" class="primary-btn">MUA NGAY</a>
+                            <a href="#hot_product" class="primary-btn">MUA NGAY</a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
     <section class="featured spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div id="hot_product" class="col-lg-12">
                     <div class="section-title">
                         <h2>Sản phẩm bán chạy</h2>
                     </div>

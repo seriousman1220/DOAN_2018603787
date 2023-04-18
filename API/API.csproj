@@ -277,6 +277,7 @@
     <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\nhanvien.cs" />
     <Compile Include="Models\trangthai.cs" />
+    <Compile Include="Models\Userinfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

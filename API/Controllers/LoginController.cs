@@ -19,10 +19,6 @@ namespace API.Controllers
     public class LoginController : ApiController
     {
         private readonly Random _random = new Random();
-        //Config email
-        //NetworkCredential login;
-        //SmtpClient client;
-        //MailMessage msg;
 
         [HttpPost]
         public HttpResponseMessage CheckLogin(Userinfo account)

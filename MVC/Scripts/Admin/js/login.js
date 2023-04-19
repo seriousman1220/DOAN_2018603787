@@ -6,8 +6,8 @@ app.controller('LoginController', ['$scope', '$http', 'growl', '$window', functi
     $scope.CheckLogin = function () {
 
         var user_check = {
-            username: $scope.username ? $scope.username : 'blank',
-            password: $scope.password,
+            user_name: $scope.username ? $scope.username : 'blank',
+            pass: $scope.password ? $scope.password : 'blank',
         };
         $http({
             method: 'POST',
@@ -43,20 +43,53 @@ app.controller('LoginController', ['$scope', '$http', 'growl', '$window', functi
                 data: data_save
             }).then(function (response) {
                 console.log(response.data);
-                if (response.data == 1) {
+                if (response.data == "OK") {
                     growl.info("Đăng kí thành công");
                     $window.location.href = '/Admin/LoginPage';
-                    
+
                 }
                 else {
-                    growl.error("Thông tin đăng nhập chưa chính xác");
+                    growl.error("Thông tin đăng kí đã tồn tại!");
                 }
-
-
             })
+
+        }
+        else {
+            growl.error("Xác nhận mật khẩu thất bại!");
+            return false;
 
         }
     }
 
-   
+    $scope.ResetPassword = function () {
+        var regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if ($scope.email_check.match(regex_email)) {
+            var user_check = {
+                email: $scope.email_check ? $scope.email_check : 'a@gmail.com',
+            };
+            $http({
+                method: 'POST',
+                url: '/API/api/Login/ResetPassword',
+                data: user_check
+            }).then(function (response) {
+                console.log(response.data);
+                if (response.data == "OK") {
+                    growl.info("Cấp lại mật khẩu thành công!");
+
+
+                }
+                else {
+                    growl.error("Email không tồn tại");
+                }
+
+
+            })
+        }
+        else {
+            growl.error("Sai định dạng email");
+            return false;
+
+        }
+        
+    }
 }]);

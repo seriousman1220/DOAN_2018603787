@@ -59,7 +59,7 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <a ng-show="!login_yn" href="@Url.Action("LoginPage", "Admin")"><i class="fa fa-user"></i> Đăng nhập</a>
-                                <a ng-show="login_yn" href="@Url.Action("LoginPage", "Admin")"><i class="fa fa-user"></i> Xin chào, {{user}}</a>
+                                <a ng-show="login_yn" href="@Url.Action("LoginPage", "Admin")"><i class="fa fa-user"></i> Xin chào, {{user.ten}}</a>
                             </div>
                         </div>
                     </div>
@@ -117,14 +117,14 @@
                             <i class="fa fa-bars"></i>
                             <span>Danh mục</span>
                         </div>
-                        <ul ng-repeat="c in courses">
+                        <ul ng-repeat="c in ds_nh_vt1">
                             @*<li><a href="#">Rau xanh</a></li>
                             <li><a href="#">Hạt cứng, đậu các loại</a></li>
                             <li><a href="#">Chè xanh</a></li>
                             <li><a href="#">Quả nhiệt đới</a></li>
                             <li><a href="#">Thực phẩm đóng hộp</a></li>
                             <li><a href="#">Đồ đông lạnh</a></li>*@
-                            <li><a href="" ng-bind="c.name"></a></li>
+                            <li><a href="" ng-bind="c.ten_nhom"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
+            <div class="row featured__filter" ng-repeat="vt in ds_vt">
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">

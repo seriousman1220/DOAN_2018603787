@@ -23,17 +23,23 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage CheckLogin(Userinfo account)
         {
-            string query = "select check_login(@username, @pass)";
+            string query = "select * from check_login(@username, @pass)";
             NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;Port=5432;Database=VanPhuc;User Id=postgres;Password=seriousman");
             conn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
             string pwd_hash = Encrypt(account.pass.ToString());
             cmd.Parameters.AddWithValue("username", account.user_name);
             cmd.Parameters.AddWithValue("pass", Encrypt(account.pass));
-
-            int exist_yn = Convert.ToInt32(cmd.ExecuteScalar());
+            Userinfo user = new Userinfo();
+            using (NpgsqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    user = ReadUserInfo(dr);
+                }
+            }
             conn.Close();
-            return Request.CreateResponse(HttpStatusCode.OK, exist_yn);
+            return Request.CreateResponse(HttpStatusCode.OK, user);
         }
 
         public HttpResponseMessage CreateAccount(Userinfo account)
@@ -180,6 +186,21 @@ namespace API.Controllers
             return passwordBuilder.ToString();
         }
 
+        private static Userinfo ReadUserInfo(NpgsqlDataReader reader)
+        {
+            int? user_id = reader["user_id"] as int?;
+            string user_name = reader["user_name"] as string;
+            string ten = reader["ten"] as string;
+            string status = reader["status"] as string;
+            Userinfo user = new Userinfo
+            {
+                user_id = user_id.Value,
+                user_name = user_name,
+                ten = ten,
+                status = status,
+            };
+            return user;
+        }
 
     }
 }

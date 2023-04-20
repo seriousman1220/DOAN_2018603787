@@ -15,10 +15,11 @@ app.controller('LoginController', ['$scope', '$http', 'growl', '$window', functi
             data: user_check
         }).then(function (response) {
             console.log(response.data);
-            if (response.data == 1) {
+            if (response.data.user_id != 0) {
+                 //Thong tin user
+                sessionStorage.user = JSON.stringify(response.data);
+                
                 $window.location.href = '/Home/MainPage';
-                sessionStorage.username = $scope.username;
-                sessionStorage.qty_cart = 0;
 
             }
             else {

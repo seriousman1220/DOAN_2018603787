@@ -288,6 +288,7 @@
     <Compile Include="Models\bophan.cs" />
     <Compile Include="Models\dmchitieu.cs" />
     <Compile Include="Models\dmchitieuct.cs" />
+    <Compile Include="Models\dmnhvt.cs" />
     <Compile Include="Models\dscombo.cs" />
     <Compile Include="Models\khoadt.cs" />
     <Compile Include="Models\LoginInfo.cs" />

@@ -10,8 +10,7 @@
             method: 'GET',
             url: '/API/api/MainPage/LoadData/'
         }).then(function (response) {
-            $scope.courses = response.data.courses;
-            console.log(response.data.courses);
+            $scope.ds_nh_vt1 = response.data.ds_nh_vt1;
             $scope.qty_cart = sessionStorage.qty_cart == null ? 0 : sessionStorage.qty_cart;
             $scope.total = sessionStorage.total == null ? 0 : sessionStorage.total;
 
@@ -20,8 +19,8 @@
         });
     }
 
-    $scope.GetNhomSP = function () {
-        //Trả về nhóm vt ở đầu web
+    $scope.GetListSPTheoNhom = function () {
+        
     }
 
     $scope.GetListSP = function () {
@@ -42,7 +41,7 @@
         }
         else {
             $scope.login_yn = true;
-            $scope.user = sessionStorage.username;
+            $scope.user = JSON.parse(sessionStorage.user);
             $scope.LoadData();
 
         }

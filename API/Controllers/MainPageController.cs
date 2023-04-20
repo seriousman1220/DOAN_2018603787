@@ -5,24 +5,49 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using Npgsql;
+using System.Data;
 namespace API.Controllers
 {
+
     public class MainPageController : ApiController
     {
-        private List<khoadt> courses = new List<khoadt> {
-            new khoadt { id= "HTML, CSS", name= "HTML + CSS", from_date= new DateTime(2022, 01, 01), to_date= new DateTime(2022, 02, 01) },
-            new khoadt { id= "JS", name= "Javascript", from_date= new DateTime(2022, 02, 01), to_date= new DateTime(2022, 02, 15) },
-            new khoadt { id= "JQuery, AngularJs", name= "JQuery - AngularJs", from_date= new DateTime(2022, 02, 15), to_date= new DateTime(2022, 03, 01) },
-            new khoadt { id= "API", name= "Kết nối Api", from_date= new DateTime(2022, 03, 02), to_date= new DateTime(2022, 04, 01) }
-        };
+        private readonly NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;Port=5432;Database=VanPhuc;User Id=postgres;Password=seriousman");
         [HttpGet]
         public HttpResponseMessage LoadData()
         {
-            dscombo dscombo = new dscombo();
-            dscombo.courses = courses;
+            conn.Open();
+            string query = "select level, ma_nhom, ten_nhom from dmnhvt where level = 1";
+            NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+            List<dmnhvt> ds_nh_vt1 = new List<dmnhvt>();
+            using (NpgsqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    ds_nh_vt1.Add(ReadNhomVT(dr));
+                }
+            }
+            conn.Close();
+            var data_return = new
+            {
+                ds_nh_vt1 = ds_nh_vt1,
 
-            return Request.CreateResponse(HttpStatusCode.OK, dscombo);
+            };
+            return Request.CreateResponse(HttpStatusCode.OK, data_return);
         }
+
+        private static dmnhvt ReadNhomVT(NpgsqlDataReader reader)
+        {
+            string ma_nhom = reader["ma_nhom"] as string;
+            string ten_nhom = reader["ten_nhom"] as string;
+            dmnhvt nhvt = new dmnhvt
+            {
+                ma_nhom = ma_nhom,
+                ten_nhom = ten_nhom,
+            };
+            return nhvt;
+        }
+
+
     }
 }
